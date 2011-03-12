@@ -7,7 +7,9 @@
 </head>
 <body>
 <canvas id="canvas"></canvas>
-<span id="score">0</span>
+<p class="hud" id="score">分數: <span>0</span></p>
+<p class="hud" id="wind">風向: <span>0</span></p>
+<p class="hud" id="bucketSize">籃子大小: <span>200</span></p>
 <button id="xplus">x+</button>
 <button id="xminus">x-</button>
 <button id="yplus">y+</button>
@@ -18,7 +20,9 @@
 <script type="text/javascript">
 jQuery(function ($) {
 	var $c = $('#canvas'),
-	$s = $('#score'),
+	$s = $('#score > span'),
+	$w = $('#wind > span'),
+	$b = $('#bucketSize > span'),
 	score = 0;
 
 	function resetCanvasSize() {
@@ -40,8 +44,23 @@ jQuery(function ($) {
 		});
 	}
 	
-	function updateScore() {
+	function updateScore(num) {
+		renewParam();
+		score += num;
 		$s.text(score.toString(10));
+	}
+	
+	function renewParam() {
+		bucketSize -= 20;
+		$b.text(bucketSize.toString(10));
+		bucketPos = document.body.offsetWidth/2 + document.body.offsetWidth/2*Math.random() - bucketSize;
+		wind = [0.03*Math.random() - 0.015, 0.03*Math.random() - 0.015];
+		$w.text(
+			Math.abs(wind[0]*100).toString(10).substr(0,3)
+			+ ((wind[0] < 0)?' 逆風':' 順風') + ', '
+			+ Math.abs(wind[1]*100).toString(10).substr(0,3)
+			+ ((wind[1] < 0)?' 向下':' 向上')
+		);
 	}
 	
 	var bucketPos,
@@ -51,8 +70,6 @@ jQuery(function ($) {
 	wind = [-0.03, 0];
 	
 	function newLabel() {
-		bucketPos = document.body.offsetWidth/2 + document.body.offsetWidth/2*Math.random() - bucketSize;
-		bucketSize -= 2;
 		$c.paperToss(
 			{
 				gofor: 'bucket',
@@ -67,7 +84,8 @@ jQuery(function ($) {
 		$c[0].getContext('2d').clearRect(0, 0, $c.attr('width'), $c.attr('height'));
 		newLabel();
 	}
-	
+
+	renewParam();	
 	resetCanvasSize();
 	setTimeout(
 		newLabel,
@@ -83,8 +101,7 @@ jQuery(function ($) {
 				initSpeed: [xspeed, yspeed],
 				wind: wind,
 				inBucket: function () {
-					score += 100;
-					updateScore();
+					updateScore(100);
 				},
 				complete: endLevel
 			}

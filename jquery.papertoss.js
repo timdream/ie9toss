@@ -38,7 +38,7 @@
 		cleanBall = function (ctx, pos) {
 			if (settings.ballImage) {
 				ctx.clearRect(
-					pos[0], pos[1],
+					pos[0] - settings.ballSize/2, pos[1] - settings.ballSize/2,
 					settings.ballSize,
 					settings.ballSize					
 				);
@@ -56,8 +56,8 @@
 					bctx.drawImage(settings.ballImage, -settings.ballSize/2, -settings.ballSize/2, settings.ballSize, settings.ballSize);
 					ctx.drawImage(
 						bc,
-						pos[0],
-						pos[1],
+						pos[0] - settings.ballSize/2,
+						pos[1] - settings.ballSize/2,
 						settings.ballSize,
 						settings.ballSize
 					);
