@@ -72,20 +72,20 @@
 					);
 				};
 				image.src = settings.bucketImage;
-			} else if (typeof settings.bucketImage === 'object') {
+			} else */
+			if (settings.bucketImage) {
 					ctx.drawImage(
 						settings.bucketImage,
-//						0, 0,
-//						settings.bucketImage.width, settings.bucketImage.width,
+						75,0,150,150,
 						pos[0],
 						pos[1],
 						size[0],
 						size[1]
 					);
-			} else { */
+			} else {
 				ctx.fillStyle = 'rgba(255,0,0,0.6)';
 				ctx.fillRect(pos[0], pos[1], size[0], size[1]);
-//			}
+			}
 		};
 		
 		if (options) { 
@@ -137,7 +137,7 @@
 				0
 			);
 			
-			drawBucket(ctx, coor(settings.bucketPos, WH), coor(settings.bucketSize, WH)); 
+			drawBucket(ctx, coor(settings.bucketPos, WH), settings.bucketSize); 
 		});
 
 	}
