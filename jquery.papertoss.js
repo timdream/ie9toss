@@ -151,7 +151,10 @@
 				);
 			} else if (settings.gofor === 'bucket') {
 				drawBucket(ctx, coor(settings.bucketPos, WH), settings.bucketSize);
-			}
+			} else if (settings.gofor === 'initball') {
+				cleanBall(ctx, coor(settings.cleanPos, WH));
+				drawBall(ctx, coor(settings.initPos, WH), coor(settings.initPos, WH));
+			} 
 		});
 
 	}
