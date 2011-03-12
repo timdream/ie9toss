@@ -25,7 +25,6 @@
 			bucketImage: null,
 			bucketImageSize: [0, 0],
 			ballImage: null,
-			ballImageSize: [0, 0],
 			ballSize: 20,
 			ballRotate: true,
 			inBucket: $.noop,
@@ -36,28 +35,26 @@
 			return [xy[0], dim[1]-xy[1]];
 		},
 		visual = function (ctx, pos, spd) {
-/*			if (settings.ballImage) {
+			if (settings.ballImage) {
 					var bc = $('<canvas />')[0];
 					bc.width = settings.ballSize;
 					bc.height = settings.ballSize;
 					
 					var bctx = bc.getContext('2d');
-					
-					bctx.drawImage(settings.ballImage, 0, 0);
+					bctx.translate(settings.ballSize/2, settings.ballSize/2);
 					bctx.rotate(Math.random()*Math.PI);
+					bctx.drawImage(settings.ballImage, -settings.ballSize/2, -settings.ballSize/2, settings.ballSize, settings.ballSize);
 					ctx.drawImage(
 						bc,
-//						0, 0,
-//						settings.ballImage.width, settings.ballImage.height,
 						pos[0],
 						pos[1],
 						settings.ballSize,
 						settings.ballSize
 					);
-			} else {*/
+			} else {
 				ctx.fillStyle = '#000';
 				ctx.fillRect(pos[0], pos[1], 3, 3);
-	//		}
+			}
 		},
 		drawBucket = function (ctx, pos, size) {
 /*			if (typeof settings.bucketImage === 'string') {
