@@ -36,16 +36,19 @@ body, input, select, button {
 
 #score {
 	top: 10px;
+	color: #300;
 	text-shadow: 0 0 10px #300;
 }
 
 #wind {
 	top: 50px;
+	color: #030;
 	text-shadow: 0 0 10px #030;
 }
 
 #bucketSize {
 	top: 90px;
+	color: #003;
 	text-shadow: 0 0 10px #003;
 }
 
@@ -93,4 +96,9 @@ button {
 #go {
 	bottom: 75px;
 	left: 90px;
+}
+
+#arrow {
+	position: absolute;
+	bottom: 5px; left: 5px;
 }

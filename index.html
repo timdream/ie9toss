@@ -18,6 +18,18 @@
 <button id="yplus">▲</button>
 <button id="yminus">▼</button>
 <button id="go">Go</button>
+<svg id="arrow"
+   width="47pt"
+   height="46pt"
+   version="1.0"
+   xmlns="http://www.w3.org/2000/svg">
+   <g transform="scale(0.1 0.1)">
+  <path
+     style="font-size:12;fill:#00f;stroke:#00f;"
+     d="M 345.23509 500.5 L 594.16634 251.00371 L 344.26968 1.468574 L 205.81581 1.525764 L 397.12537 194.51019 L 0.49999607 194.58168 L 0.62293607 305.57099 L 399.73581 305.59147 L 206.36939 500.5 L 345.23509 500.5 z "
+     sodipodi:nodetypes="cccccccccc" />
+</g>
+</svg>
 <script type="text/javascript" src="./jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.papertoss.js"></script>
 <script type="text/javascript">
@@ -26,6 +38,7 @@ jQuery(function ($) {
 	$s = $('#score > span'),
 	$w = $('#wind > span'),
 	$b = $('#bucketSize > span'),
+	$a = $('#arrow'),
 	score = 0;
 
 	function resetCanvasSize() {
@@ -120,12 +133,19 @@ jQuery(function ($) {
 		);
 	}
 
+	function updateInitCond() {
+		$a
+		.css('opacity', speed/40)
+		.css('-webkit-transform', 'rotate(-' + theta/Math.PI*180 + 'deg)');
+	}
+
 	renewParam();	
 	resetCanvasSize();
 	setTimeout(
 		function () {
 			newLabel();
 			newInitPos(startY);
+			updateInitCond();
 		},
 		500
 	);
@@ -138,14 +158,16 @@ jQuery(function ($) {
 	$('#splus').bind(
 		'click',
 		function () {
-			speed += 1;
+			if (speed < 40) speed += 1;
+			updateInitCond();
 		}
 	);
 	
 	$('#sminus').bind(
 		'click',
 		function () {
-			speed -= 1;
+			if (speed > 0) speed -= 1;
+			updateInitCond();
 		}
 	);
 
@@ -153,7 +175,7 @@ jQuery(function ($) {
 		'click',
 		function () {
 			if (theta < Math.PI/2) theta += Math.PI/32;
-			//newInitPos(startY + 10);
+			updateInitCond();
 		}
 	);
 	
@@ -161,10 +183,9 @@ jQuery(function ($) {
 		'click',
 		function () {
 			if (theta > 0) theta -= Math.PI/32;
-			//newInitPos(startY - 10);
+			updateInitCond();
 		}
 	);
-
 	
 	$('#yplus').bind(
 		'click',
