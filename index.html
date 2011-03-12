@@ -146,6 +146,7 @@ jQuery(function ($) {
 		$a
 		.css('opacity', speed/40)
 		.css('-webkit-transform', 'rotate(-' + theta/Math.PI*180 + 'deg)');
+		// http://bugs.jquery.com/ticket/8346
 		$a[0].style['-ms-transform'] = 'rotate(-' + theta/Math.PI*180 + 'deg)';
 	}
 

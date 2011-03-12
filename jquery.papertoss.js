@@ -1,4 +1,15 @@
-//"use strict";
+/*!
+
+jQuery.paperToss
+https://github.com/timdream/ie9toss
+
+by timdream (http://timc.idv.tw/)
+
+Please see README for information
+
+*/
+
+"use strict";
 
 (function ($) {
 	$.paperTossSupported = (function () {
