@@ -128,7 +128,7 @@ Please see README for information
 			ctx = this.getContext('2d');
 			
 			if (settings.gofor === 'ball') {
-				timer = setInterval(
+				var timer = setInterval(
 					function () {
 						cleanBall(ctx, coor(currentPos, WH));
 						currentSpeed = [
