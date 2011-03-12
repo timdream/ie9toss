@@ -11,8 +11,10 @@
 <p class="hud" id="score">分數: <span>0</span></p>
 <p class="hud" id="wind">風向: <span>0</span></p>
 <p class="hud" id="bucketSize">籃子大小: <span>200</span></p>
-<button id="xplus">x+</button>
-<button id="xminus">x-</button>
+<button id="splus">S+</button>
+<button id="sminus">S-</button>
+<button id="tplus">θ+</button>
+<button id="tminus">θ-</button>
 <button id="yplus">▲</button>
 <button id="yminus">▼</button>
 <button id="go">Go</button>
@@ -65,8 +67,8 @@ jQuery(function ($) {
 	}
 	
 	var bucketPos,
-	xspeed = 10,
-	yspeed = 30,
+	speed = 40,
+	theta = Math.PI/4,
 	bucketSize = 200,
 	wind = [-0.03, 0],
 	startY = 100;
@@ -106,7 +108,7 @@ jQuery(function ($) {
 			{
 				ballImage: $('#ball')[0],
 				initPos: [30, startY],
-				initSpeed: [xspeed, yspeed],
+				initSpeed: [speed*Math.cos(theta), speed*Math.sin(theta)],
 				wind: wind,
 				inBucket: function () {
 					updateScore(100);
@@ -131,24 +133,40 @@ jQuery(function ($) {
 		startToss
 	);
 	
-	$('#xplus').bind(
+	$('#splus').bind(
 		'click',
 		function () {
-			xspeed += 1;
+			speed += 1;
 		}
 	);
 	
-	$('#xminus').bind(
+	$('#sminus').bind(
 		'click',
 		function () {
-			xspeed -= 1;
+			speed -= 1;
 		}
 	);
+
+	$('#tplus').bind(
+		'click',
+		function () {
+			if (theta < Math.PI/2) theta += Math.PI/32;
+			//newInitPos(startY + 10);
+		}
+	);
+	
+	$('#tminus').bind(
+		'click',
+		function () {
+			if (theta > 0) theta -= Math.PI/32;
+			//newInitPos(startY - 10);
+		}
+	);
+
 	
 	$('#yplus').bind(
 		'click',
 		function () {
-			//yspeed += 1;
 			newInitPos(startY + 10);
 		}
 	);

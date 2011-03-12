@@ -57,7 +57,7 @@ body, input, select, button {
 
 button {
 	position: absolute;
-	width: 28px; height: 24px;
+	width: 36px; height: 24px;
 	text-align: center;
 }
 
@@ -71,13 +71,23 @@ button {
 	left: 5px;
 }
 
-#xplus {
+#splus {
 	bottom: 5px;
 	left: 80px;
 }
 
-#xminus {
+#sminus {
 	bottom: 5px;
+	left: 50px;
+}
+
+#tplus {
+	bottom: 30px;
+	left: 80px;
+}
+
+#tminus {
+	bottom: 30px;
 	left: 50px;
 }
 
