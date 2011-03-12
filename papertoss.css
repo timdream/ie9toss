@@ -1,14 +1,14 @@
 html, body {
 	border: none;
-	margin: none;
-	padding: none;
+	margin: 0;
+	padding: 0;
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
 }
 
 body, input, select, button {
-	font: 1em sans-serif;
+	font: 1em '微軟正黑體', sans-serif;
 	color: #000;
 }
 
@@ -38,18 +38,21 @@ body, input, select, button {
 	top: 10px;
 	color: #300;
 	text-shadow: 0 0 10px #300;
+	-ms-text-shadow: 0 0 10px #300;
 }
 
 #wind {
 	top: 50px;
 	color: #030;
 	text-shadow: 0 0 10px #030;
+	-ms-text-shadow: 0 0 10px #030;
 }
 
 #bucketSize {
 	top: 90px;
 	color: #003;
 	text-shadow: 0 0 10px #003;
+	-ms-text-shadow: 0 0 10px #003;
 }
 
 #bucket, #ball {
@@ -61,41 +64,46 @@ button {
 	position: absolute;
 	width: 36px; height: 24px;
 	text-align: center;
+	font-size: 0.92em;
 }
 
 #yplus {
-	bottom: 75px;
+	bottom: 125px;
 	left: 5px;
 }
 
 #yminus {
-	bottom: 50px;
+	bottom: 100px;
 	left: 5px;
 }
 
 #splus {
 	bottom: 5px;
-	left: 90px;
+	left: 160px;
 }
 
 #sminus {
 	bottom: 5px;
-	left: 50px;
+	left: 120px;
 }
 
 #tplus {
-	bottom: 30px;
-	left: 90px;
+	bottom: 70px;
+	left: 5px;
 }
 
 #tminus {
-	bottom: 30px;
-	left: 50px;
+	bottom: 5px;
+	left: 80px;
 }
 
 #go {
 	bottom: 75px;
 	left: 90px;
+	font-size: 2em;
+	font-weight: bold;
+	height: 40px;
+	width: 60px;
 }
 
 #arrow {
