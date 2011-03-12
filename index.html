@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="./papertoss.css" />
 </head>
 <body>
+<img id="bg" src="Bliss_XP.jpg" />
 <canvas id="canvas"></canvas>
 <p class="hud" id="score">分數: <span>0</span></p>
 <p class="hud" id="wind">風向: <span>0</span></p>
@@ -96,8 +97,7 @@ jQuery(function ($) {
 		$c.paperToss(
 			{
 				ballImage: $('#ball')[0],
-				initPos: [0, 60],
-				bucketPos: [bucketPos, 60],
+				initPos: [0, bucketSize/2],
 				initSpeed: [xspeed, yspeed],
 				wind: wind,
 				inBucket: function () {
