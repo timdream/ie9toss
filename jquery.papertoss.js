@@ -26,7 +26,7 @@
 			bucketImage: null,
 			bucketImageSize: [0, 0],
 			ballImage: null,
-			ballSize: 20,
+			ballSize: 50,
 			ballRotate: true,
 			inBucket: $.noop,
 			outBucket: $.noop,
@@ -111,43 +111,47 @@
 			],
 			currentPos = settings.initPos,
 			currentSpeed = settings.initSpeed,
-			ctx = this.getContext('2d')
-			timer = setInterval(
-				function () {
-					cleanBall(ctx, coor(currentPos, WH));
-					currentSpeed = [
-						currentSpeed[0] + settings.wind[0],
-						currentSpeed[1] + settings.wind[1] + settings.gravity,
-					];
-					currentPos = [
-						currentPos[0] + currentSpeed[0],
-						currentPos[1] + currentSpeed[1]
-					];
-					
-					drawBall(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
-					
-					if (
-						currentPos[0] > settings.bucketPos[0]
-						&& currentPos[0] < settings.bucketPos[0] + settings.bucketSize[0]
-						&& currentPos[1] > settings.bucketPos[1]
-						&& currentPos[1] < settings.bucketPos[1] + settings.bucketSize[1]
-					) {
-						settings.inBucket();
-						settings.complete();
-						clearTimeout(timer);					
-					}
-					if (currentPos[0] > WH[0] 
-						|| currentPos[0] < 0
-						|| currentPos[1] > WH[1]
-						|| currentPos[1] < 0 ) {
-						settings.outBucket();
-						settings.complete();
-						clearTimeout(timer);
-					}
-				},
-				50
-			);
-			drawBucket(ctx, coor(settings.bucketPos, WH), settings.bucketSize); 
+			ctx = this.getContext('2d');
+			
+			if (settings.gofor === 'ball') {
+				timer = setInterval(
+					function () {
+						cleanBall(ctx, coor(currentPos, WH));
+						currentSpeed = [
+							currentSpeed[0] + settings.wind[0]*currentSpeed[0],
+							currentSpeed[1] + settings.wind[1]*currentSpeed[1] + settings.gravity,
+						];
+						currentPos = [
+							currentPos[0] + currentSpeed[0],
+							currentPos[1] + currentSpeed[1]
+						];
+						
+						drawBall(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
+						
+						if (
+							currentPos[0] > settings.bucketPos[0]
+							&& currentPos[0] < settings.bucketPos[0] + settings.bucketSize[0]
+							&& currentPos[1] > settings.bucketPos[1]
+							&& currentPos[1] < settings.bucketPos[1] + settings.bucketSize[1]
+						) {
+							settings.inBucket();
+							settings.complete();
+							clearTimeout(timer);					
+						}
+						if (currentPos[0] > WH[0] 
+							|| currentPos[0] < 0
+							|| currentPos[1] > WH[1]
+							|| currentPos[1] < 0 ) {
+							settings.outBucket();
+							settings.complete();
+							clearTimeout(timer);
+						}
+					},
+					20
+				);
+			} else if (settings.gofor === 'bucket') {
+				drawBucket(ctx, coor(settings.bucketPos, WH), settings.bucketSize);
+			}
 		});
 
 	}

@@ -8,6 +8,11 @@
 <body>
 <canvas id="canvas"></canvas>
 <span id="score">0</span>
+<button id="xplus">x+</button>
+<button id="xminus">x-</button>
+<button id="yplus">y+</button>
+<button id="yminus">y-</button>
+<button id="go">Go</button>
 <script type="text/javascript" src="./jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.papertoss.js"></script>
 <script type="text/javascript">
@@ -39,23 +44,85 @@ jQuery(function ($) {
 		$s.text(score.toString(10));
 	}
 	
+	var bucketPos,
+	xspeed = 10,
+	yspeed = 30,
+	bucketSize = 200,
+	wind = [-0.03, 0];
+	
+	function newLabel() {
+		bucketPos = document.body.offsetWidth/2 + document.body.offsetWidth/2*Math.random() - bucketSize;
+		bucketSize -= 2;
+		$c.paperToss(
+			{
+				gofor: 'bucket',
+				bucketImage: $('#bucket')[0],
+				bucketPos: [bucketPos, bucketSize],
+				bucketSize: [bucketSize, bucketSize]
+			}
+		);
+	}
+
+	function endLevel() {
+		$c[0].getContext('2d').clearRect(0, 0, $c.attr('width'), $c.attr('height'));
+		newLabel();
+	}
+	
 	resetCanvasSize();
 	setTimeout(
-		function () {
-			$c.paperToss(
-				{
-					ballImage: $('#ball')[0],
-					bucketImage: $('#bucket')[0],
-					inBucket: function () {
-						score += 100;
-						updateScore();
-					}
-				}
-			);
-		},
+		newLabel,
 		500
 	);
 	
+	function startToss() {
+		$c.paperToss(
+			{
+				ballImage: $('#ball')[0],
+				initPos: [0, 60],
+				bucketPos: [bucketPos, 60],
+				initSpeed: [xspeed, yspeed],
+				wind: wind,
+				inBucket: function () {
+					score += 100;
+					updateScore();
+				},
+				complete: endLevel
+			}
+		);
+	}
+		
+	$('#go').bind(
+		'click',
+		startToss
+	);
+	
+	$('#xplus').bind(
+		'click',
+		function () {
+			xspeed += 1;
+		}
+	);
+	
+	$('#xminus').bind(
+		'click',
+		function () {
+			xspeed -= 1;
+		}
+	);
+	
+	$('#yplus').bind(
+		'click',
+		function () {
+			yspeed += 1;
+		}
+	);
+	
+	$('#yminus').bind(
+		'click',
+		function () {
+			yspeed -= 1;
+		}
+	);
 });
 
 </script>

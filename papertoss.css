@@ -30,3 +30,34 @@ body, input, select, button {
 	width: 512px;
 	height: 512px;
 }
+
+button {
+	position: absolute;
+	width: 28px; height: 24px;
+	text-align: center;
+}
+
+#yplus {
+	bottom: 75px;
+	left: 5px;
+}
+
+#yminus {
+	bottom: 50px;
+	left: 5px;
+}
+
+#xplus {
+	bottom: 5px;
+	left: 80px;
+}
+
+#xminus {
+	bottom: 5px;
+	left: 50px;
+}
+
+#go {
+	bottom: 75px;
+	left: 80px;
+}
