@@ -1,0 +1,32 @@
+html, body {
+	border: none;
+	margin: none;
+	padding: none;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+body, input, select, button {
+	font: 1em sans-serif;
+	color: #000;
+}
+
+#canvas {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+}
+
+#score {
+	position: absolute;
+	right: 10px; top: 10px;
+	width: 100px; height: 40px;
+	font-size: 40px;
+}
+
+#bucket, #ball {
+	display: none;
+	width: 512px;
+	height: 512px;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset=UTF-8>
+<title>Paper Toss</title>
+<link rel="stylesheet" type="text/css" href="./papertoss.css" />
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<span id="score">0</span>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.papertoss.js"></script>
+<script type="text/javascript">
+jQuery(function ($) {
+	var $c = $('#canvas'),
+	$s = $('#score'),
+	score = 0;
+
+	function resetCanvasSize() {
+		var width = document.body.offsetWidth,
+		height = document.body.offsetHeight;
+		
+		$c.attr(
+			{
+				height: height,
+				width: width
+			}
+		).css({
+			width: width.toString(10) + 'px',
+			height: height.toString(10) + 'px',
+			top: '50%',
+			left: '50%',
+			marginLeft: '-' + (width/2).toString(10) + 'px',
+			marginTop: '-' + (height/2).toString(10) + 'px'
+		});
+	}
+	
+	function updateScore() {
+		$s.text(score.toString(10));
+	}
+	
+	resetCanvasSize();
+	setTimeout(
+		function () {
+			$c.paperToss(
+				{
+					ballImage: $('#ball')[0],
+					//bucketImage: $('#bucket')[0],
+					inBucket: function () {
+						score += 100;
+						updateScore();
+					}
+				}
+			);
+		},
+		500
+	);
+	
+});
+
+</script>
+<img id="bucket" src="HTML5-logo.svg" />
+<img id="ball" src="IE9-logo.png" />
+</body>
+</html>
