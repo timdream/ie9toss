@@ -67,7 +67,7 @@ jQuery(function ($) {
 	}
 	
 	var bucketPos,
-	speed = 40,
+	speed = 20,
 	theta = Math.PI/4,
 	bucketSize = 200,
 	wind = [-0.03, 0],
@@ -109,6 +109,8 @@ jQuery(function ($) {
 				ballImage: $('#ball')[0],
 				initPos: [30, startY],
 				initSpeed: [speed*Math.cos(theta), speed*Math.sin(theta)],
+				bucketPos: [bucketPos, bucketSize],
+				bucketSize: [bucketSize, bucketSize],
 				wind: wind,
 				inBucket: function () {
 					updateScore(100);

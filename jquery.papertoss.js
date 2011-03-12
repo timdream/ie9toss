@@ -128,11 +128,18 @@
 						
 						drawBall(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
 						
+						console.log(
+							currentPos,
+							settings.bucketPos,
+							settings.bucketPos[0] + settings.bucketSize[0],
+							settings.bucketPos[1] - settings.bucketSize[1]
+						);
+						
 						if (
 							currentPos[0] > settings.bucketPos[0]
-							&& currentPos[0] < settings.bucketPos[0] + settings.bucketSize[0]
-							&& currentPos[1] > settings.bucketPos[1]
-							&& currentPos[1] < settings.bucketPos[1] + settings.bucketSize[1]
+							&& currentPos[0] < (settings.bucketPos[0] + settings.bucketSize[0])
+							&& currentPos[1] > (settings.bucketPos[1] - settings.bucketSize[1])
+							&& currentPos[1] < settings.bucketPos[1]
 						) {
 							settings.inBucket();
 							settings.complete();
