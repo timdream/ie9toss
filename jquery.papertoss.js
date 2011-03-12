@@ -47,15 +47,18 @@
 		drawBall = function (ctx, pos, spd) {
 			if (settings.ballImage) {
 					var bc = $('<canvas />')[0];
-					bc.width = settings.ballSize;
-					bc.height = settings.ballSize;
-					
+					bc.width = settings.ballImage.width;
+					bc.height = settings.ballImage.height;
 					var bctx = bc.getContext('2d');
-					bctx.translate(settings.ballSize/2, settings.ballSize/2);
+					bctx.translate(settings.ballImage.width/2, settings.ballImage.height/2);
 					bctx.rotate(Math.random()*Math.PI);
-					bctx.drawImage(settings.ballImage, -settings.ballSize/2, -settings.ballSize/2, settings.ballSize, settings.ballSize);
+					bctx.drawImage(settings.ballImage, -settings.ballImage.width/2, -settings.ballImage.height/2, settings.ballImage.width, settings.ballImage.height);
 					ctx.drawImage(
 						bc,
+						0,
+						0,
+						settings.ballImage.width,
+						settings.ballImage.height,
 						pos[0] - settings.ballSize/2,
 						pos[1] - settings.ballSize/2,
 						settings.ballSize,
@@ -86,7 +89,7 @@
 			if (settings.bucketImage) {
 					ctx.drawImage(
 						settings.bucketImage,
-						75,0,150,150,
+						//0,0,512,512, // break in webkit
 						pos[0],
 						pos[1],
 						size[0],
@@ -127,14 +130,7 @@
 						];
 						
 						drawBall(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
-						
-						console.log(
-							currentPos,
-							settings.bucketPos,
-							settings.bucketPos[0] + settings.bucketSize[0],
-							settings.bucketPos[1] - settings.bucketSize[1]
-						);
-						
+												
 						if (
 							currentPos[0] > settings.bucketPos[0]
 							&& currentPos[0] < (settings.bucketPos[0] + settings.bucketSize[0])
