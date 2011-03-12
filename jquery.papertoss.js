@@ -16,6 +16,7 @@
 		if (!$.paperTossSupported) return this;
 		
 		var settings = {
+			gofor: 'ball',
 			gravity: -9.8/10, //px
 			wind: [0, 0],
 			initPos: [0, 0],
@@ -34,7 +35,16 @@
 		coor = function (xy, dim) {
 			return [xy[0], dim[1]-xy[1]];
 		},
-		visual = function (ctx, pos, spd) {
+		cleanBall = function (ctx, pos) {
+			if (settings.ballImage) {
+				ctx.clearRect(
+					pos[0], pos[1],
+					settings.ballSize,
+					settings.ballSize					
+				);
+			}
+		},
+		drawBall = function (ctx, pos, spd) {
 			if (settings.ballImage) {
 					var bc = $('<canvas />')[0];
 					bc.width = settings.ballSize;
@@ -104,6 +114,7 @@
 			ctx = this.getContext('2d')
 			timer = setInterval(
 				function () {
+					cleanBall(ctx, coor(currentPos, WH));
 					currentSpeed = [
 						currentSpeed[0] + settings.wind[0],
 						currentSpeed[1] + settings.wind[1] + settings.gravity,
@@ -113,7 +124,7 @@
 						currentPos[1] + currentSpeed[1]
 					];
 					
-					visual(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
+					drawBall(ctx, coor(currentPos, WH), coor(currentSpeed, WH));
 					
 					if (
 						currentPos[0] > settings.bucketPos[0]
@@ -134,9 +145,8 @@
 						clearTimeout(timer);
 					}
 				},
-				0
+				50
 			);
-			
 			drawBucket(ctx, coor(settings.bucketPos, WH), settings.bucketSize); 
 		});
 
